@@ -1,0 +1,20 @@
+dist: bionic
+
+env:
+  global:
+    - TAG=pkskubeflow/ml-pipeline-frontend:0.2.5
+    - CODE_TAG=master
+
+arch:
+  - arm64
+
+services:
+  - docker
+
+before_install:
+  - git clone -b ${CODE_TAG} --depth 1 https://github.com/docker/compose.git
+
+script:
+
+  - cd compose/scripts/build
+  - ./linux
