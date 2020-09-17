@@ -18,6 +18,7 @@ before_install:
 script:
   - rm compose/script/build/linux
   - mv docker-compose-arm64/linux compose/script/build/
+  - chmod +x compose/script/build/linux
   - cd compose/
   - ./script/build/linux
   - docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}
