@@ -16,5 +16,5 @@ before_install:
 
 script:
 
-  - cd compose/script/build
-  - ./linux
+  - cd compose/
+  - ./script/build/linux
