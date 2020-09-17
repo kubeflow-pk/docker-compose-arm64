@@ -2,7 +2,7 @@ dist: bionic
 
 env:
   global:
-    - TAG=pkskubeflow/docker-compose:v1.0
+    - IMAGE=pkskubeflow/docker-compose:v1.0
     - CODE_TAG=master
 
 arch:
@@ -12,14 +12,10 @@ services:
   - docker
 
 before_install:
-  - git clone -b ${CODE_TAG} --depth 1 https://github.com/docker/compose.git
-  - git clone  --depth 1 https://github.com/kubeflow-pk/docker-compose-arm64.git
+  - git clone -b ${CODE_TAG} --depth 1 https://github.com/ubiquiti/docker-compose-aarch64.git
 
 script:
-  - rm compose/script/build/linux
-  - mv docker-compose-arm64/linux compose/script/build/
-  - chmod +x compose/script/build/linux
-  - cd compose/
-  - ./script/build/linux
+  - cd docker-compose-aarch64
+  - docker build -t ${IMAGE} .
   - docker login -u ${DOCKER_USER} -p ${DOCKER_PWD}
-  - docker push ${TAG}
+  - docker push ${IMAGE}
